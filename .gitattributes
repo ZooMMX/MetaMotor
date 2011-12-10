@@ -1,0 +1,31 @@
+* text=auto !eol
+/MetaMotor.iml -text
+/MetaMotor.ipr -text
+/MetaMotor.iws -text
+app/controllers/Application.java -text
+app/models/Consulta.java -text
+app/models/Frecuencia.java -text
+app/models/Motor.java -text
+app/models/Resultado.java -text
+app/models/Termino.java -text
+app/views/Application/index.html -text
+app/views/errors/404.html -text
+app/views/errors/500.html -text
+app/views/main.html -text
+conf/application.conf -text
+conf/dependencies.yml -text
+conf/messages -text
+conf/routes -text
+public/images/favicon.png -text svneol=unset#unset
+public/javascripts/jquery-1.6.4.min.js -text
+public/stylesheets/main.css -text
+test-result/TEST-BasicTest.xml -text
+test-result/TEST-WorkflowTest.xml -text
+test-result/WorkflowTest.class.failed.html -text
+test-result/application.log -text
+test-result/result.failed -text
+test/Application.test.html -text
+test/ApplicationTest.java -text
+test/BasicTest.java -text
+test/WorkflowTest.java -text
+test/data.yml -text
