@@ -6,10 +6,10 @@
 #   password: secret
 #   fullname: Bob
 Consulta.Consulta(q1):
-  consulta: "Prueba de búsqueda"
+  consulta: "Esto es una prueba de esta consulta casa"
 
 Consulta.Consulta(q2):
-  consulta: "Prueba de búsqueda 2"
+  consulta: "Tomarlos Tomarlo Tomarle Tomarles"
 
 Motor(m1):
   nombre: "Motor específico 1 rock"
@@ -23,10 +23,10 @@ Termino(t1):
   termino: "hol"
 
 Termino(t2):
-  termino: "prueb"
+  termino: "consult"
 
 Termino(t3):
-  termino: "libr"
+  termino: "tom"
 
 Termino(t4):
   termino: "moch"
@@ -36,50 +36,50 @@ Termino(t5):
 
 Frecuencia(f1):
   frecuencia: 7
-  motor:      m1
+  fuente:     m1
   termino:    t1
 
 Frecuencia(f2):
   frecuencia: 3
-  motor:      m1
+  fuente:     m1
   termino:    t2
 
 Frecuencia(f3):
   frecuencia: 19
-  motor:      m1
+  fuente:     m1
   termino:    t3
 
 Frecuencia(f4):
   frecuencia: 0
-  motor:      m1
+  fuente:     m1
   termino:    t4
 
 Frecuencia(f5):
   frecuencia: 0
-  motor:      m1
+  fuente:     m1
   termino:    t5
 
 Frecuencia(f6):
   frecuencia: 1
-  motor:      m2
+  fuente:     m2
   termino:    t1
 
 Frecuencia(f7):
   frecuencia: 8
-  motor:      m2
+  fuente:     m2
   termino:    t2
 
 Frecuencia(f8):
   frecuencia: 21
-  motor:      m2
+  fuente:     m2
   termino:    t3
 
 Frecuencia(f9):
   frecuencia: 9
-  motor:      m2
+  fuente:     m2
   termino:    t4
 
 Frecuencia(f10):
   frecuencia: 4
-  motor:      m2
+  fuente:     m2
   termino:    t5

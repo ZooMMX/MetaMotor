@@ -26,7 +26,7 @@ public class MotorTest extends UnitTest {
     @Test
     public void testSeleccionarMotores() throws Exception {
         Consulta consulta = Consulta.all().first();
-        Assert.assertNotNull(consulta.getFrecuencias());
+        consulta.calcularFrecuencias();
 
         List<Motor> motores = Motor.seleccionarMotores(consulta);
         Assert.assertNotNull(motores);

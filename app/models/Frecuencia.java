@@ -17,8 +17,20 @@ public class Frecuencia extends Model {
     public Long frecuencia;
 
     @ManyToOne
-    public Motor motor;
+    public Fuente fuente;
 
     @ManyToOne
     public Termino termino;
+
+    public static Frecuencia findOrCreate(Fuente fuente, Termino termino) {
+        Frecuencia frec = Frecuencia.find("fuente = ? AND termino = ?", fuente, termino).first();
+        if(frec == null) {
+            frec = new Frecuencia();
+            frec.frecuencia = 0l;
+            frec.fuente     = fuente;
+            frec.termino    = termino;
+            frec.save();
+        }
+        return frec;
+    }
 }

@@ -1,23 +1,34 @@
 package models;
 
+import play.data.validation.Unique;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
- * User: usuario1
+ * User: PNMB
  * Date: 5/12/11
  * Time: 11:18 PM
- * To change this template use File | Settings | File Templates.
  */
 @Entity
 public class Termino extends Model {
 
-    String termino;
+    @Unique
+    public String termino;
 
+    public static Termino findOrCreate(String termino) {
+        Termino t = Termino.find("byTermino", termino).first();
+        if(t == null) {
+            t = new Termino();
+            t.termino = termino;
+            t.save();
+        }
+        return t;
+    }
     //@OneToMany(mappedBy = "frecuencia")
     //List<Frecuencia> frecuencias;
 }

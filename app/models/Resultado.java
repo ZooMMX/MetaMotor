@@ -4,6 +4,7 @@ import models.Consulta.Consulta;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class Resultado extends Model {
 
     Motor motor;
 
+    @ManyToOne
     Consulta consulta;
 
     public static List<Resultado> mezclar(Hashtable<Motor, List<Resultado>> resultados) {

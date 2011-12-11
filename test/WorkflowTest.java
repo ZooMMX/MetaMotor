@@ -32,7 +32,7 @@ public class WorkflowTest extends UnitTest {
         // 1
         Consulta consultaDelUsuario = Consulta.all().first();
         Logger.info("prueba"+consultaDelUsuario.consulta);
-        Assert.assertNotNull(consultaDelUsuario.getFrecuencias());
+        Assert.assertNotNull(consultaDelUsuario.contarFrecuencias());
         //2
         List<Motor> motores;
         motores = Motor.seleccionarMotores(consultaDelUsuario);
