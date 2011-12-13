@@ -2,6 +2,8 @@ package models;
 
 import models.Consulta.Consulta;
 import org.apache.commons.lang.NotImplementedException;
+import org.apache.xmlrpc.client.XmlRpcClient;
+import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 import org.junit.Before;
 import play.Logger;
 import play.db.jpa.JPA;
@@ -9,10 +11,11 @@ import play.test.Fixtures;
 
 import javax.persistence.Entity;
 import javax.persistence.Query;
+import javax.swing.event.ListSelectionEvent;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URL;
+import java.util.*;
 import java.lang.Math.*;
 
 /**
@@ -68,6 +71,34 @@ public class Motor extends Fuente {
     }
 
     public List<Resultado> consultar(Consulta consultaDelUsuario) {
+        try {
+           XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+           XmlRpcClient           client = new XmlRpcClient();
+           config.setServerURL(new URL("http://localhost/xmlrpc"));
+           client.setConfig(config);
+
+           Object[]        params     = new Object[]{ consultaDelUsuario.consulta };
+           List            rawList    = Arrays.asList( (Object[]) client.execute("Motor.consultar", params) );
+           List<Resultado> resultados = rawList2Resultados(rawList, consultaDelUsuario);
+
+           Logger.info("+Respuesta del servidor XMLRPC: " + resultados);
+           return resultados;
+
+        } catch (Exception exception) {
+           Logger.error(exception, "JavaClient: " + exception);
+        }
         return null;
+    }
+
+    private List<Resultado> rawList2Resultados(List rawList, Consulta consulta) {
+        List<Resultado> resultados = new ArrayList<Resultado>();
+        for (Object o : rawList) {
+            Resultado r = new Resultado();
+            r.consulta  = consulta;
+            r.motor     = this;
+            r.documento = String.valueOf(o);
+            resultados.add(r);
+        }
+        return resultados;
     }
 }

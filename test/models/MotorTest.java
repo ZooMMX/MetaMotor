@@ -40,7 +40,4 @@ public class MotorTest extends UnitTest {
 
     }
 
-    public void testConsultar() throws Exception {
-
-    }
 }
