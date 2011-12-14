@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
  import javax.persistence.PostPersist;
  import javax.persistence.PrePersist;
  import java.util.AbstractMap;
+ import java.util.ArrayList;
  import java.util.List;
 import java.util.Map;
 
@@ -27,15 +28,24 @@ public class Consulta extends Fuente {
     @OneToMany(mappedBy = "consulta")
     public List<Resultado> resultados;
 
+    public static Consulta crearConsulta(String consultaTxt) {
+        Consulta consultaDelUsuario = new Consulta();
+        consultaDelUsuario.consulta = consultaTxt;
+        consultaDelUsuario.save();
+        consultaDelUsuario.calcularFrecuencias();
+        consultaDelUsuario.frecuencias = Frecuencia.find("byFuente", consultaDelUsuario).fetch();
+        return consultaDelUsuario;
+    }
+
     public void calcularFrecuencias() {
         AbstractMap<String, Long> frecuencias = contarFrecuencias();
+
         for (String termino : frecuencias.keySet()) {
             Termino t = Termino.findOrCreate(termino);
 
             Frecuencia frec = Frecuencia.findOrCreate(this, t);
             frec.frecuencia = frecuencias.get(termino);
             frec.save();
-
         }
     }
 

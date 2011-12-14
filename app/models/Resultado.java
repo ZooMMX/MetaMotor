@@ -11,10 +11,9 @@ import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
- * User: usuario1
+ * User: PNMB
  * Date: 5/12/11
  * Time: 11:21 PM
- * To change this template use File | Settings | File Templates.
  */
 @Entity
 public class Resultado extends Model {

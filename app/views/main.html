@@ -4,13 +4,42 @@
     <head>
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap.css'}">
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
         <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         #{get 'moreScripts' /}
     </head>
-    <body>
-        #{doLayout /}
+    <body style="padding-top: 40px;">
+        <div class="topbar">
+          <div class="fill">
+            <div class="container">
+              <a class="brand" href="@{Application.index()}">Proy. Final MetaMotor</a>
+                <ul class="nav">
+                    <li><a href="@{Application.indexarMotores()}">Indexar motores</a></li>
+                    <li><a href="@{Motores.index()}">Admin motores</a></li>
+                </ul>
+                <ul class="nav secondary-nav">
+                        <li>
+                        <form class="pull-left" action="">
+                            <select name="nRes" id="nRes" class="small">
+                                ${nDocs}
+                                <option %{nDocs==3?"SELECTED":""}%>3</option>
+                                <option %{nDocs==10?"SELECTED":""}%>10</option>
+                                <option %{nDocs==15?"SELECTED":""}%>15</option>
+                                <option %{nDocs==50?"SELECTED":""}%>50</option>
+                            </select>
+                        </form>
+                        </li>
+                    </ul>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+            #{doLayout /}
+            <footer>
+                <p>&copy; Recuperación de Información, Paula N. Medina.</p>
+            </footer>
+        </div>
     </body>
 </html>

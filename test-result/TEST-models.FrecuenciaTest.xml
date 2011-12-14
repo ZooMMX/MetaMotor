@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<testsuite failures="0" time="0.077" errors="0" skipped="0" tests="1" name="models.FrecuenciaTest">
-  <testcase classname="models.FrecuenciaTest" name="testFindOrCreate" time="0.077">
+<testsuite failures="0" time="0.137" errors="0" skipped="0" tests="1" name="models.FrecuenciaTest">
+  <testcase classname="models.FrecuenciaTest" name="testFindOrCreate" time="0.137">
       </testcase>
 </testsuite>

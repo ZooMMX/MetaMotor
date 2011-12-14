@@ -15,32 +15,57 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class ClienteXMLRPC implements Serializable {
-    public ClienteXMLRPC() {
+public class ClienteXmlRpc implements Serializable {
+    public String       urlXmlRpc;
+    public XmlRpcClient client;
+    private Motor motor;
+
+    public ClienteXmlRpc(Motor motor) throws MalformedURLException {
+        this(motor.urlXmlRpc);
+        this.motor = motor;
+    }
+
+    public ClienteXmlRpc(String urlXmlRpc) throws MalformedURLException {
+        this.urlXmlRpc = urlXmlRpc;
+
+        XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+        client = new XmlRpcClient();
+        config.setServerURL(new URL(urlXmlRpc));
+        client.setConfig(config);
     }
 
     List<Resultado> consultar(Consulta consultaDelUsuario) throws MalformedURLException, XmlRpcException {
-        XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-        XmlRpcClient client = new XmlRpcClient();
-        config.setServerURL(new URL("http://localhost:9001/xmlrpc"));
-        client.setConfig(config);
 
-        Object[] params = new Object[]{consultaDelUsuario.consulta};
+        Object[] params = new Object[]{consultaDelUsuario.consulta, motor.weight.doubleValue()};
         List rawList = Arrays.asList((Object[]) client.execute("Motor.consultar", params));
-        return rawList2Resultados(rawList, consultaDelUsuario);
+        motor = motor;
+        return rawList2Resultados(rawList, consultaDelUsuario, motor);
     }
 
-    List<Resultado> rawList2Resultados(List rawList, Consulta consulta) {
+    List<Resultado> rawList2Resultados(List rawList, Consulta consulta, Motor motor) {
         List<Resultado> resultados = new ArrayList<Resultado>();
         for (Object o : rawList) {
             HashMap<String, Object> map = (HashMap<String, Object>) o;
             Resultado r = new Resultado();
             r.consulta = consulta;
-            r.motor = null;
+            r.motor = motor;
             r.documento = (String) map.get("documento");
             r.relevancia = new BigDecimal((Double) map.get("relevancia"));
             resultados.add(r);
         }
         return resultados;
+    }
+
+    public String getUrlXmlRpc() {
+        return urlXmlRpc;
+    }
+
+    public Long getNDocs() throws XmlRpcException {
+        Object[] params = new Object[]{};
+        return Long.valueOf( (Integer) client.execute("Motor.getNDocs", params) );
+    }
+
+    public HashMap<String,Integer> getFrecuencias() throws XmlRpcException {
+        return (HashMap<String, Integer>) client.execute("Motor.getFrecuencias", new ArrayList());
     }
 }

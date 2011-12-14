@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<testsuite failures="0" time="4.19" errors="0" skipped="0" tests="1" name="models.IndexadorTest">
+  <testcase classname="models.IndexadorTest" name="testIndexar" time="4.19">
+      </testcase>
+</testsuite>

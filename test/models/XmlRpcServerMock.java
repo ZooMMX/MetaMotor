@@ -14,7 +14,7 @@ import java.util.List;
  * Time: 08:57 PM
  */
 public class XmlRpcServerMock {
-    public List<AbstractMap<String, Object>> consultar(String consulta) {
+    public List<AbstractMap<String, Object>> consultar(String consulta, Double weight) {
         ArrayList<AbstractMap<String, Object>> resultados = new ArrayList<AbstractMap<String, Object>>();
         AbstractMap<String, Object> map1 = new HashMap<String, Object>();
         AbstractMap<String, Object> map2 = new HashMap<String, Object>();
@@ -28,5 +28,19 @@ public class XmlRpcServerMock {
         resultados.add(map1);
         resultados.add(map2);
         return resultados;
+    }
+
+    public Integer getNDocs() {
+        return 21;
+    }
+
+    public HashMap<String, Integer> getFrecuencias() {
+        HashMap<String, Integer> res = new HashMap<String, Integer>();
+        res.put("hol", 4);
+        res.put("consult", 7);
+        res.put("tom", 1);
+        res.put("es", 5);
+        res.put("estar", 2);
+        return res;
     }
 }

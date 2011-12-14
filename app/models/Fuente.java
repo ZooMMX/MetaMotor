@@ -14,7 +14,6 @@ import java.util.List;
  * Date: 10/12/11
  * Time: 02:34 PM
  */
-//@NamedQuery(name = "getFrecuenciasIn", query = "FROM Frecuencia frec WHERE frec.motor = :motor AND frec.termino in (:terminosList)")
 @Entity
 public class Fuente extends Model {
     @OneToMany(mappedBy = "fuente")

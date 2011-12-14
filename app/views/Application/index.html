@@ -1,25 +1,30 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{ifErrors}
-   <h1>Oops…</h1>
 
-   #{errors}
-       <li>${error}</li>
-   #{/errors}
-#{/ifErrors}
 #{form @Application.index()}
-    <p>
-        <label for="consulta">Búsqueda: </label>
-        <input type="text" name="consulta" id="consulta" />
-    </p>
-    <p>
-        <input type="submit" name="Buscar" value="Buscar" />
-    </p>
+      <div class="hero-unit" style="text-align: center; height: 60px">
+        <h2>Buscador UDLAP</h2>
+            <p>
+                <input type="hidden" name="nDocs" id="nDocs" />
+                <input type="text" name="consulta" id="consulta" class="span8" />
+                <input type="submit" name="Buscar" value="Buscar" class="btn primary large"
+                       onclick="document.getElementById('nDocs').value = document.getElementById('nRes').value"/>
+            </p>
+      </div>
 #{/form}
 
+%{if (resultados.size()>0) {}%
 <ul>
-    #{list items:resultados, as:'resultado' }
-        <li>${resultado}</li>
-    #{/list}
+    <table>
+        <thead><tr><th>Motor</th><th>Documento</th><th>Relevancia</th></tr></thead>
+        #{list items:resultados, as:'resultado' }
+            <tr>
+                <td>${resultado.motor.nombre}</td>
+                <td>${resultado.documento}</td>
+                <td>${resultado.relevancia.format("0.0000")}</td>
+            </tr>
+        #{/list}
+    </table>
 </ul>
+%{}}%

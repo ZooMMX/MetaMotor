@@ -3,13 +3,11 @@ package models.motor;
 import models.Consulta.Consulta;
 import models.Fuente;
 import models.Resultado;
-import org.apache.xmlrpc.XmlRpcException;
 import play.Logger;
 
 import javax.persistence.Entity;
 import javax.persistence.Query;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.util.*;
 
 /**
@@ -25,7 +23,7 @@ public class Motor extends Fuente {
     public BigDecimal rm;
     public BigDecimal weight;
     public Long nDocs;
-    private final ClienteXMLRPC clienteXMLRPC = new ClienteXMLRPC();
+    public String urlXmlRpc;
 
     public static List<Motor> seleccionarMotores(Consulta consultaDelUsuario) {
         try {
@@ -63,8 +61,9 @@ public class Motor extends Fuente {
     }
 
     public List<Resultado> consultar(Consulta consultaDelUsuario) throws Exception {
+        ClienteXmlRpc clienteXmlRpc = new ClienteXmlRpc(this);
         try {
-           List<Resultado> resultados = clienteXMLRPC.consultar(consultaDelUsuario);
+           List<Resultado> resultados = clienteXmlRpc.consultar(consultaDelUsuario);
 
            Logger.info("+Respuesta del servidor XMLRPC: " + resultados);
            return resultados;
@@ -86,7 +85,7 @@ public class Motor extends Fuente {
             BigDecimal extraerNDocs = new BigDecimal(0d);
             BigDecimal k = new BigDecimal(resultadosEsperados.doubleValue());
             extraerNDocs = extraerNDocs.add(k.multiply(motor.rm));
-            extraerNDocs = extraerNDocs.divide(rmTotal);
+            extraerNDocs = extraerNDocs.divide(rmTotal, BigDecimal.ROUND_HALF_UP);
             motor.setWeight(extraerNDocs);
         }
 
@@ -97,4 +96,7 @@ public class Motor extends Fuente {
         this.rm = rm;
     }
 
+    public void setNDocs(Long nDocs) {
+        this.nDocs = nDocs;
+    }
 }

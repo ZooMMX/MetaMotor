@@ -1,5 +1,4 @@
 import models.Consulta.Consulta;
-import models.Frecuencia;
 import models.motor.Motor;
 import models.Resultado;
 import models.XmlRpcServerMock;
@@ -11,7 +10,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import play.db.jpa.JPA;
 import play.test.Fixtures;
 import play.test.UnitTest;
 
@@ -20,10 +18,9 @@ import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
- * User: usuario1
+ * User: PNMB
  * Date: 5/12/11
  * Time: 11:49 PM
- * To change this template use File | Settings | File Templates.
  */
 public class WorkflowTest extends UnitTest {
 
@@ -58,20 +55,8 @@ public class WorkflowTest extends UnitTest {
     @Test
     public void WorkflowTest() {
         // 1
-        Consulta consultaDelUsuario = new Consulta();
-        consultaDelUsuario.consulta = "Esto es una prueba de esta consulta de prueba pura prueba Tomarla Tomarlas";
-        consultaDelUsuario.contarFrecuencias();
-        consultaDelUsuario.save();
-        consultaDelUsuario.calcularFrecuencias();
-        JPA.em().getTransaction().commit();
-        JPA.em().getTransaction().begin();
-        List<Frecuencia> frecuencias = Frecuencia.find("byFuente", consultaDelUsuario).fetch();
-
-        Assert.assertNotNull("Consulta: "+consultaDelUsuario.consulta+", sin palabras clave", frecuencias);
+        Consulta consultaDelUsuario = Consulta.crearConsulta("Esto es una prueba de esta consulta de prueba pura prueba Tomarla Tomarlas");
         Assert.assertNotNull("Consulta: "+consultaDelUsuario.consulta+", sin palabras clave", consultaDelUsuario.frecuencias);
-        //Consulta consultaDelUsuario = Consulta.all().first();
-        //Assert.assertNotNull(consultaDelUsuario.contarFrecuencias());
-        //consultaDelUsuario.calcularFrecuencias();
         //2
         List<Motor> motores;
         motores = Motor.seleccionarMotores(consultaDelUsuario);
@@ -90,4 +75,5 @@ public class WorkflowTest extends UnitTest {
         //6
         List<Resultado> resultadosMezclados = Resultado.mezclar(resultados);
     }
+
 }

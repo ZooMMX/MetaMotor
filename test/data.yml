@@ -15,11 +15,13 @@ motor.Motor(m1):
   nombre: "Motor específico 1 rock"
   frecuencias: [f1,f2,f3,f4,f5]
   nDocs: 10
+  urlXmlRpc: "http://localhost:9001/xmlrpc"
 
 motor.Motor(m2):
   nombre: "Motor específico 2 filosofía"
   frecuencias: [f6,f7,f8,f9,f10]
   nDocs: 30
+  urlXmlRpc: "http://localhost:9001/xmlrpc"
 
 Termino(t1):
   termino: "hol"

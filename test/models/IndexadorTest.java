@@ -1,6 +1,5 @@
 package models;
 
-import models.Consulta.Consulta;
 import models.motor.Motor;
 import org.apache.xmlrpc.server.PropertyHandlerMapping;
 import org.apache.xmlrpc.server.XmlRpcServer;
@@ -12,16 +11,13 @@ import org.junit.Test;
 import play.test.Fixtures;
 import play.test.UnitTest;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  * User: PNMB
- * Date: 12/12/11
- * Time: 08:53 PM
+ * Date: 14/12/11
+ * Time: 05:36 AM
  */
-public class MotorRemoteTest extends UnitTest {
+public class IndexadorTest extends UnitTest {
 
     WebServer server;
 
@@ -29,8 +25,7 @@ public class MotorRemoteTest extends UnitTest {
     public void setUp() {
         Fixtures.deleteDatabase();
         Fixtures.loadModels("data.yml");
-
-      try {
+        try {
          System.out.println("Attempting to start XML-RPC Server...");
          server = new WebServer(9001);
          XmlRpcServer xmlRpcServer = server.getXmlRpcServer();
@@ -42,9 +37,9 @@ public class MotorRemoteTest extends UnitTest {
          server.start();
          System.out.println("Started successfully.");
          System.out.println("Accepting requests. (Halt program to stop.)");
-       } catch (Exception exception) {
+        } catch (Exception exception) {
          System.err.println("JavaServer: " + exception);
-       }
+        }
     }
 
     @After
@@ -53,15 +48,21 @@ public class MotorRemoteTest extends UnitTest {
     }
 
     @Test
-    public void testConsultar() throws Exception {
-        Consulta consultaDelUsuario = Consulta.all().first();
+    public void testIndexar() throws Exception {
+        Indexador indexador = new Indexador();
+        indexador.indexar();
 
-        Motor motor  = Motor.all().first();
-        motor.weight = new BigDecimal(1d);
-        List<Resultado> resultados = motor.consultar(consultaDelUsuario);
+        Motor motor1 = Motor.all().first();
+        Termino t1   = Termino.findOrCreate("hol");
+        Termino t2   = Termino.findOrCreate("consult");
+        Termino t3   = Termino.findOrCreate("tom");
+        Termino t4   = Termino.findOrCreate("es");
+        Termino t5   = Termino.findOrCreate("estar");
 
-        Assert.assertTrue(resultados != null);
-        Assert.assertTrue(resultados.size() == 2);
-        Assert.assertTrue(resultados.get(0).documento.equals("documento prueba 1"));
+        Assert.assertTrue( Frecuencia.findOrCreate(motor1, t1).frecuencia == 4l );
+        Assert.assertTrue( Frecuencia.findOrCreate(motor1, t2).frecuencia == 7l );
+        Assert.assertTrue( Frecuencia.findOrCreate(motor1, t3).frecuencia == 1l );
+        Assert.assertTrue( Frecuencia.findOrCreate(motor1, t4).frecuencia == 5l );
+        Assert.assertTrue( Frecuencia.findOrCreate(motor1, t5).frecuencia == 2l );
     }
 }
