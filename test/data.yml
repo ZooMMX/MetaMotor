@@ -14,10 +14,12 @@ Consulta.Consulta(q2):
 Motor(m1):
   nombre: "Motor específico 1 rock"
   frecuencias: [f1,f2,f3,f4,f5]
+  nDocs: 10
 
 Motor(m2):
   nombre: "Motor específico 2 filosofía"
   frecuencias: [f6,f7,f8,f9,f10]
+  nDocs: 30
 
 Termino(t1):
   termino: "hol"

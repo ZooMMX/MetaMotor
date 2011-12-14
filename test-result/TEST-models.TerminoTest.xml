@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<testsuite failures="0" time="0.092" errors="0" skipped="0" tests="1" name="models.TerminoTest">
-  <testcase classname="models.TerminoTest" name="testFindOrCreate" time="0.092">
+<testsuite failures="0" time="0.065" errors="0" skipped="0" tests="1" name="models.TerminoTest">
+  <testcase classname="models.TerminoTest" name="testFindOrCreate" time="0.065">
       </testcase>
 </testsuite>

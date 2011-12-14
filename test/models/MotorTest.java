@@ -30,14 +30,16 @@ public class MotorTest extends UnitTest {
 
         List<Motor> motores = Motor.seleccionarMotores(consulta);
         Assert.assertNotNull(motores);
+        Assert.assertTrue(motores.size() > 0);
     }
 
+    @Test
     public void testSelectorDocumentos() throws Exception {
+        Consulta consulta = Consulta.all().first();
+        consulta.calcularFrecuencias();
+        List<Motor> motores = Motor.all().fetch();
 
+        motores = Motor.selectorDocumentos(consulta, 10l, motores);
+        Assert.assertNotNull(motores);
     }
-
-    public void testSetWeight() throws Exception {
-
-    }
-
 }
