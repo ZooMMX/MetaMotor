@@ -11,12 +11,12 @@ Consulta.Consulta(q1):
 Consulta.Consulta(q2):
   consulta: "Tomarlos Tomarlo Tomarle Tomarles"
 
-Motor(m1):
+motor.Motor(m1):
   nombre: "Motor específico 1 rock"
   frecuencias: [f1,f2,f3,f4,f5]
   nDocs: 10
 
-Motor(m2):
+motor.Motor(m2):
   nombre: "Motor específico 2 filosofía"
   frecuencias: [f6,f7,f8,f9,f10]
   nDocs: 30
@@ -85,3 +85,27 @@ Frecuencia(f10):
   frecuencia: 4
   fuente:     m2
   termino:    t5
+
+Resultado(r1):
+  documento:  "Taoísmo es una tradición filosófica y religiosa que lleva más de dos milenios ejerciendo su influencia en los pueblos del Extremo Oriente."
+  relevancia: 0.6
+  motor:      m1
+  consulta:   q1
+
+Resultado(r2):
+  documento:  "Dentro de los orígenes del hard rock se pueden mencionar estilos y género tan variados como el garage rock."
+  relevancia: 0.1
+  motor:      m1
+  consulta:   q1
+
+Resultado(r3):
+  documento:  "Un himno es un canto o texto narrativo que, al igual que la oda, expresa sentimientos positivos, de alegría y celebración."
+  relevancia: 0.2
+  motor:      m1
+  consulta:   q1
+
+Resultado(r4):
+  documento:  "El relativismo es una posición filosófica que sostiene en ciertos aspectos que no existen hechos o principios universales compartidos por todas las culturas humanas."
+  relevancia: 0.9
+  motor:      m1
+  consulta:   q1

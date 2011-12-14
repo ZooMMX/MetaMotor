@@ -1,8 +1,7 @@
 package models;
 
 import models.Consulta.Consulta;
-import org.apache.xmlrpc.client.XmlRpcClient;
-import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
+import models.motor.Motor;
 import org.apache.xmlrpc.server.PropertyHandlerMapping;
 import org.apache.xmlrpc.server.XmlRpcServer;
 import org.apache.xmlrpc.webserver.WebServer;
@@ -10,11 +9,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import play.Logger;
 import play.test.Fixtures;
 import play.test.UnitTest;
 
-import java.net.URL;
 import java.util.List;
 
 /**
@@ -34,7 +31,7 @@ public class MotorRemoteTest extends UnitTest {
 
       try {
          System.out.println("Attempting to start XML-RPC Server...");
-         server = new WebServer(80);
+         server = new WebServer(9001);
          XmlRpcServer xmlRpcServer = server.getXmlRpcServer();
          PropertyHandlerMapping phm = new PropertyHandlerMapping();
 
@@ -63,6 +60,6 @@ public class MotorRemoteTest extends UnitTest {
 
         Assert.assertTrue(resultados != null);
         Assert.assertTrue(resultados.size() == 2);
-        Assert.assertTrue(resultados.get(0).documento.equals("Resultado de la búsqueda 1"));
+        Assert.assertTrue(resultados.get(0).documento.equals("documento prueba 1"));
     }
 }

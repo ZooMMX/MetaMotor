@@ -1,7 +1,11 @@
 *{ You can use plain selenium command using the selenium tag }*
 
+#{fixture delete:'all', load:'data.yml' /}
 #{selenium}
     // Open the home page, and check that no error occured
     open('/')
-    assertNotTitle('Application error')
+    type('consulta', "Esto es una prueba de esta consulta de prueba pura prueba Tomarla Tomarlas")
+    clickAndWait('Buscar')
+    assertTextPresent('Búsqueda')
+
 #{/selenium}

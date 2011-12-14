@@ -1,4 +1,25 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+#{ifErrors}
+   <h1>Oops…</h1>
+
+   #{errors}
+       <li>${error}</li>
+   #{/errors}
+#{/ifErrors}
+#{form @Application.index()}
+    <p>
+        <label for="consulta">Búsqueda: </label>
+        <input type="text" name="consulta" id="consulta" />
+    </p>
+    <p>
+        <input type="submit" name="Buscar" value="Buscar" />
+    </p>
+#{/form}
+
+<ul>
+    #{list items:resultados, as:'resultado' }
+        <li>${resultado}</li>
+    #{/list}
+</ul>

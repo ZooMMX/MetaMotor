@@ -1,6 +1,7 @@
 package models;
 
 import models.Consulta.Consulta;
+import models.motor.Motor;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
